@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <DockerFastModeProjectMountDirectory>/home/site/wwwroot</DockerFastModeProjectMountDirectory>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="RedisListener.WorkerBinding\**" />
+    <Compile Remove="RedisListenerInProcess\**" />
+    <Compile Remove="RedisListener\**" />
+    <EmbeddedResource Remove="RedisListener.WorkerBinding\**" />
+    <EmbeddedResource Remove="RedisListenerInProcess\**" />
+    <EmbeddedResource Remove="RedisListener\**" />
+    <None Remove="RedisListener.WorkerBinding\**" />
+    <None Remove="RedisListenerInProcess\**" />
+    <None Remove="RedisListener\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.14.1" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.10.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http" Version="3.0.13" />
+    <PackageReference Include="Microsoft.Azure.WebJobs" Version="3.0.37" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.1" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.116" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="RedisListener.WorkerBinding\RedisListener.WorkerBinding.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
+  </ItemGroup>
+</Project>

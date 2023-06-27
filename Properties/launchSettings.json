@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "RedisListenerFunction": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7069"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 30872,
+      "useSSL": false
+    }
+  }
+}
