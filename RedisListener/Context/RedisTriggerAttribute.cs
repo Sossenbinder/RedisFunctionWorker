@@ -16,7 +16,6 @@ namespace RedisListener.Context
 			string connectionString,
 			string streamName)
 		{
-			Console.WriteLine("Hello froma ttribute");
 			ConnectionString = connectionString;
 			StreamName = streamName;
 		}

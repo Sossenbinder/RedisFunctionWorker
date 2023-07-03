@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Bindings;
 using Microsoft.Azure.WebJobs.Host.Listeners;
 using Microsoft.Azure.WebJobs.Host.Protocols;
 using Microsoft.Azure.WebJobs.Host.Triggers;
 using RedisListener.Context;
+using RedisListener.Model;
 using RedisListener.ValueBinding;
 using StackExchange.Redis;
 
@@ -14,29 +16,48 @@ namespace RedisListener.Binding
 	// Creates a listener and binds data to the result
 	internal class RedisListenerTriggerBinding : ITriggerBinding
 	{
-		public Type TriggerValueType { get; } = typeof(StreamEntry);
+		public Type TriggerValueType { get; } = typeof(RedisMessagePackage);
 
-		public IReadOnlyDictionary<string, Type> BindingDataContract { get; } = new Dictionary<string, Type>();
+		public IReadOnlyDictionary<string, Type> BindingDataContract { get; } = CreateBindingDataContract();
 
 		private readonly RedisTriggerContext _triggerContext;
+
+		private readonly Type _parameterType;
 
 		public RedisListenerTriggerBinding(RedisTriggerContext triggerContext, Type parameterType)
 		{
 			_triggerContext = triggerContext;
-			TriggerValueType = parameterType;
+			_parameterType = parameterType;
 		}
 
 		public Task<ITriggerData> BindAsync(object value, ValueBindingContext context)
 		{
-			Console.WriteLine("BindAsync");
-			var valueBinder = new RedisTriggerValueProvider(value, TriggerValueType);
-			return Task.FromResult<ITriggerData>(new TriggerData(valueBinder, new Dictionary<string, object>()));
+			var package = (RedisMessagePackage) value;
+			var valueBinder = new RedisTriggerValueProvider(package, _parameterType);
+			return Task.FromResult<ITriggerData>(new TriggerData(valueBinder, CreateBindingData(package)));
 		}
 
 		public Task<IListener> CreateListenerAsync(ListenerFactoryContext context)
 		{
 			IListener listener = new Listener.RedisListener(context.Executor, _triggerContext);
 			return Task.FromResult(listener);
+		}
+
+		internal static IReadOnlyDictionary<string, object> CreateBindingData(RedisMessagePackage value)
+		{
+			var bindingData = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) {{nameof(value.StreamEntry), value.StreamEntry}};
+
+			return bindingData;
+		}
+
+		private static IReadOnlyDictionary<string, Type> CreateBindingDataContract()
+		{
+			var contract = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase)
+			{
+				["StreamEntry"] = typeof(StreamEntry),
+			};
+
+			return contract;
 		}
 
 		public ParameterDescriptor ToParameterDescriptor()

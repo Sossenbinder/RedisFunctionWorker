@@ -14,7 +14,6 @@ namespace RedisListenerInProcess.Functions
 			StreamEntry entry)
 		{
 			await Task.Yield();
-			Console.WriteLine("Hello world");
 		}
 	}
 }

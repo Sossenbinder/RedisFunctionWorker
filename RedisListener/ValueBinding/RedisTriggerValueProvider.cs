@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Bindings;
+using Newtonsoft.Json;
+using RedisListener.Model;
 
 namespace RedisListener.ValueBinding
 {
@@ -8,27 +10,23 @@ namespace RedisListener.ValueBinding
 	{
 		public Type Type { get; }
 
-		private object _value;
+		private readonly RedisMessagePackage _messagePackage;
 
-		public RedisTriggerValueProvider(object value, Type type)
+		public RedisTriggerValueProvider(RedisMessagePackage messagePackage, Type requestedParameterType)
 		{
-			Type = type;
-			_value = value;
+			Type = requestedParameterType;
+			_messagePackage = messagePackage;
 		}
 
 		public Task<object> GetValueAsync()
 		{
-			if (Type == typeof(string))
-			{
-				return Task.FromResult<object>(ToInvokeString());
-			}
-
-			return Task.FromResult(_value);
+			Console.WriteLine($"Serializing to ${Type.Name}");
+			return Task.FromResult<object>(ToInvokeString());
 		}
 
 		public string ToInvokeString()
 		{
-			return _value.ToString();
+			return JsonConvert.SerializeObject(_messagePackage.StreamEntry);
 		}
 	}
 }

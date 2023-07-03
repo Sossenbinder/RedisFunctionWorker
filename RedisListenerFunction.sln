@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33711.374
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisListenerFunction", "RedisListenerFunction.csproj", "{21458EC9-6CC9-457E-8431-84B186474375}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisListener", "RedisListener\RedisListener.csproj", "{9BB55272-0E95-467D-941F-9EAE85616DE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisListener", "RedisListener\RedisListener.csproj", "{9BB55272-0E95-467D-941F-9EAE85616DE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisListener.WorkerBinding", "RedisListener.WorkerBinding\RedisListener.WorkerBinding.csproj", "{C55B4418-6A47-4F40-AF73-FA0EB1785A09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisListener.WorkerBinding", "RedisListener.WorkerBinding\RedisListener.WorkerBinding.csproj", "{C55B4418-6A47-4F40-AF73-FA0EB1785A09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisListenerInProcess", "RedisListenerInProcess\RedisListenerInProcess.csproj", "{8E1A1107-187B-4C62-94EB-2A090AB9B288}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisListenerInProcess", "RedisListenerInProcess\RedisListenerInProcess.csproj", "{8E1A1107-187B-4C62-94EB-2A090AB9B288}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisListenerFunction", "RedisListenerFunction\RedisListenerFunction.csproj", "{B9D3A1C4-0EDF-4111-9DED-455A08E0EE3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{21458EC9-6CC9-457E-8431-84B186474375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{21458EC9-6CC9-457E-8431-84B186474375}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{21458EC9-6CC9-457E-8431-84B186474375}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{21458EC9-6CC9-457E-8431-84B186474375}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9BB55272-0E95-467D-941F-9EAE85616DE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9BB55272-0E95-467D-941F-9EAE85616DE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BB55272-0E95-467D-941F-9EAE85616DE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{8E1A1107-187B-4C62-94EB-2A090AB9B288}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E1A1107-187B-4C62-94EB-2A090AB9B288}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E1A1107-187B-4C62-94EB-2A090AB9B288}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9D3A1C4-0EDF-4111-9DED-455A08E0EE3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9D3A1C4-0EDF-4111-9DED-455A08E0EE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9D3A1C4-0EDF-4111-9DED-455A08E0EE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9D3A1C4-0EDF-4111-9DED-455A08E0EE3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

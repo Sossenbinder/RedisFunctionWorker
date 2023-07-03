@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Executors;
 using Microsoft.Azure.WebJobs.Host.Listeners;
 using RedisListener.Context;
+using RedisListener.Model;
 
 namespace RedisListener.Listener
 {
@@ -54,14 +55,24 @@ namespace RedisListener.Listener
 
 			while (!ct.IsCancellationRequested)
 			{
-				var streamEntries = await db.StreamReadAsync(_triggerContext.RedisTriggerAttribute.StreamName, 0);
-
-				await Task.WhenAll(streamEntries.Select(x => _triggeredFunctionExecutor.TryExecuteAsync(new TriggeredFunctionData
+				try
 				{
-					TriggerValue = x.ToString()
-				}, ct)));
+					var streamEntries = await db.StreamReadAsync(_triggerContext.RedisTriggerAttribute.StreamName, 0);
 
-				await Task.Delay(500, ct);
+					await Task.WhenAll(streamEntries.Select(x => _triggeredFunctionExecutor.TryExecuteAsync(new TriggeredFunctionData
+					{
+						TriggerValue = new RedisMessagePackage()
+						{
+							StreamEntry = x
+						}
+					}, ct)));
+
+					await Task.Delay(500, ct);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex);
+				}
 			}
 		}
 	}

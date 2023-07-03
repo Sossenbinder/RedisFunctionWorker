@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Azure.Functions.Worker.Extensions.Abstractions;
 
-namespace RedisListener.Context
+namespace RedisListener.WorkerBinding
 {
 	// The attribute providing the context of the trigger
 	[AttributeUsage(AttributeTargets.Parameter)]
