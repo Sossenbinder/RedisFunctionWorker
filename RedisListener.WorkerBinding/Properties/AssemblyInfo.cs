@@ -1,3 +1,3 @@
 ﻿using Microsoft.Azure.Functions.Worker.Extensions.Abstractions;
 
-[assembly: ExtensionInformation("RedisListener", "1.0.32")]
+[assembly: ExtensionInformation("RedisListener", "1.0.45")]

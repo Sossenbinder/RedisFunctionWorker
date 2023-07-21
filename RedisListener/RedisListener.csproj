@@ -7,14 +7,19 @@
 
   <PropertyGroup>
     <PackageId>RedisListener</PackageId>
-    <Version>1.0.32</Version>
-    <Authors>your_name</Authors>
-    <Company>your_company</Company>
+    <Version>1.0.45</Version>
+    <Authors>stefan</Authors>
+    <Company>stefan company</Company>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Core" Version="1.12.1" />
     <PackageReference Include="Microsoft.Azure.WebJobs" Version="3.0.37" />
     <PackageReference Include="StackExchange.Redis" Version="2.6.116" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RedisListener.Common\RedisListener.Common.csproj" />
   </ItemGroup>
 
 </Project>

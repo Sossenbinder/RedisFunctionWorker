@@ -3,9 +3,6 @@ using Microsoft.Extensions.Configuration;
 using RedisListener.Binding;
 using RedisListener.Context;
 using StackExchange.Redis;
-using System.Data;
-using System;
-using System.Text;
 
 namespace RedisListener.Config
 {
