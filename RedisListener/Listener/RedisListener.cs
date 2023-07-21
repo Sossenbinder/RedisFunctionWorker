@@ -53,11 +53,15 @@ namespace RedisListener.Listener
 		{
 			var db = _triggerContext.ConnectionMultiplexer.GetDatabase();
 
+			var res = await db.StreamInfoAsync(_triggerContext.RedisTriggerAttribute.StreamName);
+
+			var position = res.LastEntry.Id;
+
 			while (!ct.IsCancellationRequested)
 			{
 				try
 				{
-					var streamEntries = await db.StreamReadAsync(_triggerContext.RedisTriggerAttribute.StreamName, 0);
+					var streamEntries = await db.StreamReadAsync(_triggerContext.RedisTriggerAttribute.StreamName, position);
 
 					await Task.WhenAll(streamEntries.Select(x => _triggeredFunctionExecutor.TryExecuteAsync(new TriggeredFunctionData
 					{
@@ -66,6 +70,11 @@ namespace RedisListener.Listener
 							StreamEntry = x
 						}
 					}, ct)));
+
+					if (streamEntries.Length != 0)
+					{
+						position = streamEntries.Last().Id;
+					}
 
 					await Task.Delay(500, ct);
 				}
