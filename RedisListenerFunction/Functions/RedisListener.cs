@@ -1,6 +1,4 @@
-﻿using System.Net;
-using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.Functions.Worker.Http;
+﻿using Microsoft.Azure.Functions.Worker;
 using RedisListener.WorkerBinding;
 using StackExchange.Redis;
 
@@ -13,14 +11,6 @@ namespace RedisListenerFunction.Functions
 		{
 			await Task.Yield();
 			Console.WriteLine(entry.ToString());
-		}
-
-
-		[Function("http listener")]
-		public static async Task<HttpResponseData> HandleHttp([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "test")] HttpRequestData data)
-		{
-			await Task.Yield();
-			return data.CreateResponse(HttpStatusCode.AlreadyReported);
 		}
 	}
 }

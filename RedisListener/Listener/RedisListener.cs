@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Executors;
 using Microsoft.Azure.WebJobs.Host.Listeners;
 using RedisListener.Context;
-using RedisListener.Model;
 
 namespace RedisListener.Listener
 {
@@ -65,10 +64,7 @@ namespace RedisListener.Listener
 
 					await Task.WhenAll(streamEntries.Select(x => _triggeredFunctionExecutor.TryExecuteAsync(new TriggeredFunctionData
 					{
-						TriggerValue = new RedisMessagePackage()
-						{
-							StreamEntry = x
-						}
+						TriggerValue = x
 					}, ct)));
 
 					if (streamEntries.Length != 0)

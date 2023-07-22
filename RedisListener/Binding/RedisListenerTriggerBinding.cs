@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Bindings;
 using Microsoft.Azure.WebJobs.Host.Listeners;
 using Microsoft.Azure.WebJobs.Host.Protocols;
 using Microsoft.Azure.WebJobs.Host.Triggers;
 using RedisListener.Context;
-using RedisListener.Model;
 using RedisListener.ValueBinding;
 using StackExchange.Redis;
 
@@ -16,7 +14,7 @@ namespace RedisListener.Binding
 	// Creates a listener and binds data to the result
 	internal class RedisListenerTriggerBinding : ITriggerBinding
 	{
-		public Type TriggerValueType { get; } = typeof(RedisMessagePackage);
+		public Type TriggerValueType { get; } = typeof(StreamEntry);
 
 		public IReadOnlyDictionary<string, Type> BindingDataContract { get; } = CreateBindingDataContract();
 
@@ -32,9 +30,9 @@ namespace RedisListener.Binding
 
 		public Task<ITriggerData> BindAsync(object value, ValueBindingContext context)
 		{
-			var package = (RedisMessagePackage) value;
-			var valueBinder = new RedisTriggerValueProvider(package, _parameterType);
-			return Task.FromResult<ITriggerData>(new TriggerData(valueBinder, CreateBindingData(package)));
+			var streamEntry = (StreamEntry) value;
+			var valueBinder = new RedisTriggerValueProvider(streamEntry, _parameterType);
+			return Task.FromResult<ITriggerData>(new TriggerData(valueBinder, CreateBindingData(streamEntry)));
 		}
 
 		public Task<IListener> CreateListenerAsync(ListenerFactoryContext context)
@@ -43,9 +41,9 @@ namespace RedisListener.Binding
 			return Task.FromResult(listener);
 		}
 
-		internal static IReadOnlyDictionary<string, object> CreateBindingData(RedisMessagePackage value)
+		internal static IReadOnlyDictionary<string, object> CreateBindingData(StreamEntry value)
 		{
-			var bindingData = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) {{nameof(value.StreamEntry), value.StreamEntry}};
+			var bindingData = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase) {{nameof(value), value}};
 
 			return bindingData;
 		}

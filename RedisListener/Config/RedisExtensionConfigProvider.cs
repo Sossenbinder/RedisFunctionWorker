@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.WebJobs.Host.Config;
+﻿using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs.Host.Config;
 using Microsoft.Extensions.Configuration;
 using RedisListener.Binding;
 using RedisListener.Context;
@@ -21,9 +22,9 @@ namespace RedisListener.Config
 			triggerRule.BindToTrigger(new RedisListenerTriggerBindingProvider(this));
 		}
 
-		public IConnectionMultiplexer CreateMultiplexer(RedisTriggerAttribute triggerAttribute)
+		public async Task<IConnectionMultiplexer> CreateMultiplexer(RedisTriggerAttribute triggerAttribute)
 		{
-			return ConnectionMultiplexer.Connect(GetValueOrSecretFromConfig(triggerAttribute.ConnectionString));
+			return await ConnectionMultiplexer.ConnectAsync(GetValueOrSecretFromConfig(triggerAttribute.ConnectionString));
 		}
 
 		private string GetValueOrSecretFromConfig(string value)

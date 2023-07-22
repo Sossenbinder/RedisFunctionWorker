@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Bindings;
 using RedisListener.Common;
-using RedisListener.Model;
+using StackExchange.Redis;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace RedisListener.ValueBinding
@@ -12,14 +12,14 @@ namespace RedisListener.ValueBinding
 	{
 		public Type Type { get; }
 
-		private readonly RedisMessagePackage _messagePackage;
+		private readonly StreamEntry _streamEntry;
 
 		private readonly JsonSerializerOptions _options;
 
-		public RedisTriggerValueProvider(RedisMessagePackage messagePackage, Type requestedParameterType)
+		public RedisTriggerValueProvider(StreamEntry streamEntry, Type requestedParameterType)
 		{
 			Type = requestedParameterType;
-			_messagePackage = messagePackage;
+			_streamEntry = streamEntry;
 
 			var options = new JsonSerializerOptions();
 			options.Converters.Add(new StreamEntryJsonConverter());
@@ -29,10 +29,6 @@ namespace RedisListener.ValueBinding
 
 		public Task<object> GetValueAsync() => Task.FromResult<object>(ToInvokeString());
 
-		public string ToInvokeString() => JsonSerializer.Serialize(new CustomStreamEntry()
-		{
-			Id = _messagePackage.StreamEntry.Id,
-			Values = _messagePackage.StreamEntry.Values,
-		}, _options);
+		public string ToInvokeString() => JsonSerializer.Serialize(_streamEntry, _options);
 	}
 }

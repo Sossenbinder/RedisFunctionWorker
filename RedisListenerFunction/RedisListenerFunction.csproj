@@ -32,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RedisListener.Common\RedisListener.Common.csproj" />
     <ProjectReference Include="..\RedisListener.WorkerBinding\RedisListener.WorkerBinding.csproj" />
+    <ProjectReference Include="..\RedisListener\RedisListener.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">
