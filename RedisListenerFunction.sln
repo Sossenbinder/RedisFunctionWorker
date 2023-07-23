@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisListener", "RedisListe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisListener.WorkerBinding", "RedisListener.WorkerBinding\RedisListener.WorkerBinding.csproj", "{C55B4418-6A47-4F40-AF73-FA0EB1785A09}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisListenerInProcess", "RedisListenerInProcess\RedisListenerInProcess.csproj", "{8E1A1107-187B-4C62-94EB-2A090AB9B288}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisListenerFunction", "RedisListenerFunction\RedisListenerFunction.csproj", "{B9D3A1C4-0EDF-4111-9DED-455A08E0EE3C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisListener.Common", "RedisListener.Common\RedisListener.Common.csproj", "{2D01AB95-B2CA-49C8-9C82-AA8A577FDFFB}"
@@ -27,10 +25,6 @@ Global
 		{C55B4418-6A47-4F40-AF73-FA0EB1785A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C55B4418-6A47-4F40-AF73-FA0EB1785A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C55B4418-6A47-4F40-AF73-FA0EB1785A09}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E1A1107-187B-4C62-94EB-2A090AB9B288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E1A1107-187B-4C62-94EB-2A090AB9B288}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E1A1107-187B-4C62-94EB-2A090AB9B288}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E1A1107-187B-4C62-94EB-2A090AB9B288}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B9D3A1C4-0EDF-4111-9DED-455A08E0EE3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B9D3A1C4-0EDF-4111-9DED-455A08E0EE3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9D3A1C4-0EDF-4111-9DED-455A08E0EE3C}.Release|Any CPU.ActiveCfg = Release|Any CPU

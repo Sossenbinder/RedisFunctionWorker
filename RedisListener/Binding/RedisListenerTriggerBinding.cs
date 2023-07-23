@@ -5,6 +5,7 @@ using Microsoft.Azure.WebJobs.Host.Bindings;
 using Microsoft.Azure.WebJobs.Host.Listeners;
 using Microsoft.Azure.WebJobs.Host.Protocols;
 using Microsoft.Azure.WebJobs.Host.Triggers;
+using Newtonsoft.Json.Linq;
 using RedisListener.Context;
 using RedisListener.ValueBinding;
 using StackExchange.Redis;
