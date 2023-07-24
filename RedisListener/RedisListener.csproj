@@ -7,9 +7,10 @@
 
   <PropertyGroup>
     <PackageId>RedisListener</PackageId>
-    <Version>1.1.1</Version>
-    <Authors>stefan</Authors>
-    <Company>stefan company</Company>
+    <Version>1.1.13</Version>
+    <Authors>unknown</Authors>
+    <Company>unknown company</Company>
+    <IncludeSymbols>True</IncludeSymbols>
   </PropertyGroup>
 
   <ItemGroup>

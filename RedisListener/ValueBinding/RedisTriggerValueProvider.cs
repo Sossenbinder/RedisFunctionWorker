@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs.Host.Bindings;
@@ -29,6 +31,9 @@ namespace RedisListener.ValueBinding
 
 		public Task<object> GetValueAsync() => Task.FromResult<object>(ToInvokeString());
 
-		public string ToInvokeString() => JsonSerializer.Serialize(_streamEntry, _options);
+		public string ToInvokeString()
+		{
+			return JsonSerializer.Serialize(_streamEntry, _options);
+		}
 	}
 }

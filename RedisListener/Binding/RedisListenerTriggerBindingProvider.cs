@@ -18,9 +18,14 @@ namespace RedisListener.Binding
 			_redisExtensionConfigProvider = redisExtensionConfigProvider;
 		}
 
-		public async Task<ITriggerBinding> TryCreateAsync(TriggerBindingProviderContext context)
+		public async Task<ITriggerBinding?> TryCreateAsync(TriggerBindingProviderContext context)
 		{
 			var redisTriggerAttribute = context.Parameter.GetCustomAttribute<RedisTriggerAttribute>(false);
+
+			if (redisTriggerAttribute is null)
+			{
+				return null;
+			}
 
 			return new RedisListenerTriggerBinding(
 				new RedisTriggerContext(

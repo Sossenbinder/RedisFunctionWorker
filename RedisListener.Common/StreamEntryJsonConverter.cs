@@ -48,6 +48,7 @@ namespace RedisListener.Common
 
 			writer.WriteString(nameof(StreamEntry.Id), value.Id.ToString());
 
+			writer.WritePropertyName(nameof(StreamEntry.Values));
 			JsonSerializer.Serialize(writer, value.Values, options);
 
 			writer.WriteEndObject();
